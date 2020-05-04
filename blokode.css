@@ -1,0 +1,86 @@
+* {
+    font-family: 'Metropolis', 'Spoqa Han Sans', Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#blokode {
+    display: flex;
+}
+
+button {
+    width: fit-content;
+    height: fit-content;
+    display: block;
+    border: none;
+    border-radius: 7px;
+    background-color: #3C82F4;
+    color: #FFF;
+    outline: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    padding: 10px;
+    font-size: 1rem;
+    font-family: 'Metropolis Semi Bold', 'Spoqa Han Sans', Arial, Helvetica, sans-serif;
+}
+
+.block {
+    cursor: default;
+    display: block;
+    border: none;
+    border-radius: 0 10px;
+    color: #FFF;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    padding: 15px;
+    font-size: 1rem;
+    font-family: 'Metropolis', 'Spoqa Han Sans', Arial, Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    background-color: #3C82F4;
+    width: fit-content;
+    position: relative;
+}
+
+.dragged {
+    transform: translateY(-100%);
+}
+
+.bloKategory.testCategory div {
+    background-color: #3C82F4;
+}
+
+.playground {
+    height: fit-content;
+    width: 70vw;
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+}
+
+.line {
+    width: 100%;
+    align-items: center;
+}
+
+.line-number {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+}
+
+.blockList {
+    display: none;
+}
