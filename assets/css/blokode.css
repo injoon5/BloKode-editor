@@ -9,6 +9,10 @@ body {
 
 #blokode {
     display: flex;
+    width: 100vw;
+    height: 100vh;
+    align-content: center;
+    justify-content: center;
 }
 
 button {
@@ -25,6 +29,18 @@ button {
     padding: 10px;
     font-size: 1rem;
     font-family: 'Metropolis Semi Bold', 'Spoqa Han Sans', Arial, Helvetica, sans-serif;
+}
+
+.blocks {
+    position: absolute;
+    top: calc(3vh + 30px);
+    left: 0;
+    margin: 10px;
+    border: 1px solid #eee;
+    height: calc(100% - 20px);
+    padding: 20px;
+    border-radius: 10px;
+    width: fit-content;
 }
 
 .block {
@@ -45,10 +61,21 @@ button {
     background-color: #3C82F4;
     width: fit-content;
     position: relative;
+    margin: 10px 0 10px 0;
+}
+
+.hidden {
+    display: none;
 }
 
 .dragged {
     transform: translateY(-100%);
+    margin: 0;
+}
+
+.bloKategory div {
+    border-radius: 0 10px;
+    width: max-content;
 }
 
 .bloKategory.testCategory div {
@@ -60,12 +87,9 @@ button {
     width: 70vw;
     border: 1px solid #e2e2e2;
     border-radius: 10px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
+    margin: 20px 0 20px 0;
 }
 
 .line {
