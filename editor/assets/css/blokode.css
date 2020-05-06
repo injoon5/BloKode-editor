@@ -19,7 +19,6 @@ body {
 }
 
 button {
-    width: fit-content;
     height: fit-content;
     display: block;
     border: none;
@@ -31,7 +30,7 @@ button {
     -webkit-tap-highlight-color: transparent;
     padding: 10px 30px;
     font-size: 1rem;
-    font-family: 'Metropolis Semi Bold', 'Spoqa Han Sans', Arial, Helvetica, sans-serif;
+    font-family: 'Metropolis Semi Bold', 'Spoqa Han Sans Bold', Arial, Helvetica, sans-serif;
     width: max-content;
 }
 
@@ -69,7 +68,7 @@ button {
 }
 
 .logo a {
-    font-family: 'Metropolis Bold', 'Spoqa Han Sans Bold', Arial, Helvetica, sans-serif;
+    font-family: 'Metropolis Semi Bold', 'Spoqa Han Sans Bold', Arial, Helvetica, sans-serif;
     font-size: 2rem;
     color: #3C82F4;
     text-decoration: none;
@@ -147,7 +146,7 @@ button {
 }
 
 .line-number {
-    background-color: #ffffff;
+    background-color: #3C82F4;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -155,5 +154,32 @@ button {
 }
 
 .blockList {
+    display: none;
+}
+
+select {
+    align-items: center;
+    justify-content: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAASCAYAAABB7B6eAAABSUlEQVQ4EaXVu0rEUBDG8RVERfDaqIidhYXgE1jI4q2ysra0FXwLC9/B0guIoHY2dmKjhQgqCDYKFoJ3Bf3JSBbcJVl3N1MkZHLm/+XMd85JAW2YxAqu8amx+MY7LhPWbLALmMEZXhrjplY94xzTIbCNp9Rh+ZLxwVshsInHfKzU6jfshEARF6lD8iXDz2IIdGEND/l4ZdVhdnSmJwSaMIxDxErIG8E4wmiwCxFoxnjifB6RqL3CFFp+4aVLsh/mcZNjCrdYQHuJW3ZHBxZx34BIeLiM7jJo5QN6sYHYLLXGB3bRV8lLfcYgDuo4Nk4wkgrLSmIMpzVMITybi4WSxUrNxypAmH5XRST6voTOVMh/yTAM6xl+RN/3a+57lhgGEtDrn5l84bjuvlcRGUpE4l8Rp2Qc7xN19z1LIPLoxyr2kl3fWm186d0P39Wum+aRPmgAAAAASUVORK5CYII=) no-repeat calc(100% - 12px) 50%;
+    background-size: 8px;
+    outline-width: 0;
+    display: block;
+    border: none;
+    border-radius: 7px;
+    background-color: #3C82F4;
+    color: #FFF;
+    outline: none;
+    cursor: pointer;
+    padding: 0 30px;
+    -webkit-tap-highlight-color: transparent;
+    font-size: 1rem;
+    font-family: 'Metropolis Semi Bold', 'Spoqa Han Sans', Arial, Helvetica, sans-serif;
+    width: max-content;
+}
+
+select::-ms-expand {
     display: none;
 }

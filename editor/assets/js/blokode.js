@@ -1,10 +1,44 @@
 const lines = new Array
-let lineNum = 0
+let lineNum = 0, language
+
+if (localStorage.getItem('lang')) {
+    language = localStorage.getItem('lang')
+} else {
+    localStorage.setItem('lang', 'en')
+    language = localStorage.getItem('lang')
+}
 
 const run = () => {
     for (let i = 0; i < $('.line .block').length; i++) {
         blockCode[$('.line .block').eq(i)[0].classList[1]]()
     }
+}
+
+const langs = () => {
+    $('.run').text(lang[language.toUpperCase()].run)
+    $('.toggleBlock').text(lang[language.toUpperCase()].toggleBlockOpen)
+    $('.language option').eq(0).text(lang[language.toUpperCase()].lang.en)
+    $('.language option').eq(1).text(lang[language.toUpperCase()].lang.kr)
+}
+
+const clickEvents = () => {
+    $('.run').on('click', (e) => {
+        run()
+    })
+    $('.line-number').on('click', (e) => {
+        deleteLine()
+    })
+    $('.toggleBlock').on('click', (e) => {
+        if (e.target.classList[1]) {
+            $('.blocks').eq(0)[0].classList.add('hidden')
+            e.target.classList.remove('red')
+            e.target.innerHTML = lang[language.toUpperCase()].toggleBlockOpen
+        } else {
+            $('.blocks').eq(0)[0].classList.remove('hidden')
+            e.target.classList.add('red')
+            e.target.innerHTML = lang[language.toUpperCase()].toggleBlockClose
+        }
+    })
 }
 
 for (let i = 0; i < document.getElementsByClassName('block').length; i++) {
@@ -77,7 +111,13 @@ $(document).on('click', () => {
     $('.playground').attr('style', `top: ${$('.sidePanel').height() + 10}px`)
 })
 
+$('.language').on('change', (e) => {
+    localStorage.setItem('lang', e.target.value)
+    window.location.reload()
+})
+
 $(() => {
+    langs()
     for (let i = 0; i < 50; i++) {
         $('.playground').append(`<div class="line"></div>`)
     }
@@ -103,21 +143,7 @@ $(() => {
     $('.line-number').height('46px')
     $('.line-number').width('46px')
     $('.playground').attr('style', `top: ${$('.sidePanel').height() + 10}px`)
-    $('.run').on('click', (e) => {
-        run()
-    })
-    $('.line-number').on('click', (e) => {
-        deleteLine()
-    })
-    $('.toggleBlock').on('click', (e) => {
-        if (e.target.classList[1]) {
-            $('.blocks').eq(0)[0].classList.add('hidden')
-            e.target.classList.remove('red')
-            e.target.innerHTML = '블록 열기'
-        } else {
-            $('.blocks').eq(0)[0].classList.remove('hidden')
-            e.target.classList.add('red')
-            e.target.innerHTML = '블록 닫기'
-        }
-    })
+    $('.language').height($('.run').eq(0)[0].clientHeight)
+    $(`.language .${localStorage.getItem('lang')}`).attr('selected', 'true')
+    clickEvents()
 })
