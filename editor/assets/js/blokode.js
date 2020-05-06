@@ -99,6 +99,7 @@ $(() => {
     $('.line-number').height('46px')
     $('.line-number').width('46px')
     $('.sidePanelContainer').width(`${$('.sidePanel').width()}px`)
+    $('.playground').width(`${$(document).width() - $('.sidePanel').width() - 80}px`)
     $('.run').on('click', (e) => {
         run()
     })

@@ -120,7 +120,6 @@ button {
 
 .playground {
     height: fit-content;
-    width: calc(100% - 265px);
     border: 1px solid #e2e2e2;
     border-radius: 10px;
     display: flex;
