@@ -1,4 +1,5 @@
 const lines = new Array
+let lineNum = 0
 
 const run = () => {
     for (let i = 0; i < $('.line .block').length; i++) {
@@ -48,6 +49,27 @@ $(window).on('scroll', () => {
     let scrollPosition = $(window).height() + $(window).scrollTop()
     if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
         console.log('test')
+        $('.line').eq(lineNum).css('border-radius', '0')
+        for (let i = 0; i < 50; i++) {
+            $('.playground').append(`<div class="line"></div>`)
+        }
+        for (let i = lineNum; i < $('.line').length; i++) {
+            lines.push(false)
+            $('.line').eq(i).append(`<div class='line-number'>${Number(i) + 1}</div>`)
+
+            if (i % 2 == 0) {
+                $('.line').eq(i).css('background-color', '#eee')
+                $('.line-number').eq(i).css('background-color', '#fff')
+            } else {
+                $('.line').eq(i).css('background-color', '#fff')
+                $('.line-number').eq(i).css('background-color', '#eee')
+            }
+            lineNum++
+        }
+        $('.line-number').eq(lineNum).css('border-radius', '0 0 0 10px')
+        $('.line').height('46px')
+        $('.line-number').height('46px')
+        $('.line-number').width('46px')
     }
 })
 
@@ -58,7 +80,7 @@ $(() => {
     for (let i = 0; i < $('.line').length; i++) {
         lines.push(false)
         $('.line').eq(i).append(`<div class='line-number'>${Number(i) + 1}</div>`)
-        
+
         if (i % 2 == 0) {
             $('.line').eq(i).css('background-color', '#eee')
             $('.line-number').eq(i).css('background-color', '#fff')
@@ -66,17 +88,18 @@ $(() => {
             $('.line').eq(i).css('background-color', '#fff')
             $('.line-number').eq(i).css('background-color', '#eee')
         }
+        lineNum++
     }
     $('.line').height('46px')
     $('.block').height('16px')
     $('.line').eq(0).css('border-radius', '10px 10px 0 0')
-    $('.line').eq($('.line').length - 1).css('border-radius', '0 0 10px 10px')
+    $('.line').eq(lineNum).css('border-radius', '0 0 10px 10px')
     $('.line-number').eq(0).css('border-radius', '10px 0 0 0')
-    $('.line-number').eq($('.line-number').length - 1).css('border-radius', '0 0 0 10px')
+    $('.line-number').eq(lineNum).css('border-radius', '0 0 0 10px')
     $('.line-number').height('46px')
     $('.line-number').width('46px')
     $('.run').on('click', (e) => {
-      run()
+        run()
     })
     $('.line-number').on('click', (e) => {
         deleteLine()
