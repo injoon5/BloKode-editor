@@ -98,7 +98,7 @@ $(() => {
     $('.line-number').eq(lineNum).css('border-radius', '0 0 0 10px')
     $('.line-number').height('46px')
     $('.line-number').width('46px')
-    $('.sidePanelContainer').width($('.sidePanel').width() + 10)
+    $('.sidePanelContainer').width(`${$('.sidePanel').width()}px`)
     $('.run').on('click', (e) => {
         run()
     })
