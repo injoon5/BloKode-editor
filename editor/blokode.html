@@ -1,22 +1,31 @@
 <link rel="stylesheet" href="assets/css/blokode.css">
 
-<div class="sidePanelContainer">
-    <div class="sidePanel">
+<div class="sidePanel">
+    <div class="tools">
         <div class="logo">
             <a href="/editor">BloKode</a>
         </div>
         <div class="runBlocks">
             <button class="run">실행</button>
         </div>
-        <div class="blocks">
-            <div class="bloKategory testCategory">
-                <div>
-                    <div class="block test" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', null)"
-                        data-function="test()">test</div>
+        <div class="runBlocks">
+            <button class="toggleBlock">블록 열기</button>
+        </div>
+    </div>
+    <div class="blocks hidden">
+        <div class="bloKategory testCategory">
+            <div>
+                <div class="block test" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', null)"
+                    data-function="test()">test</div>
+            </div>
+            <div>
+                <div class="block annyonghasalbup" draggable="true"
+                    ondragstart="event.dataTransfer.setData('text/plain', null)" data-function="hello()">안녕하살법!
                 </div>
-                <div>
-                    <div class="block annyonghasalbup" draggable="true"
-                        ondragstart="event.dataTransfer.setData('text/plain', null)" data-function="hello()">안녕하살법!</div>
+            </div>
+            <div>
+                <div class="block annyonghasalbup" draggable="true"
+                    ondragstart="event.dataTransfer.setData('text/plain', null)" data-function="hello()">안녕하살법!
                 </div>
             </div>
         </div>

@@ -73,6 +73,10 @@ $(window).on('scroll', () => {
     }
 })
 
+$(document).on('click', () => {
+    $('.playground').attr('style', `top: ${$('.sidePanel').height() + 10}px`)
+})
+
 $(() => {
     for (let i = 0; i < 50; i++) {
         $('.playground').append(`<div class="line"></div>`)
@@ -98,12 +102,22 @@ $(() => {
     $('.line-number').eq(lineNum).css('border-radius', '0 0 0 10px')
     $('.line-number').height('46px')
     $('.line-number').width('46px')
-    $('.sidePanelContainer').width(`${$('.sidePanel').width()}px`)
-    $('.playground').width(`${$(document).width() - $('.sidePanel').width() - 80}px`)
+    $('.playground').attr('style', `top: ${$('.sidePanel').height() + 10}px`)
     $('.run').on('click', (e) => {
         run()
     })
     $('.line-number').on('click', (e) => {
         deleteLine()
+    })
+    $('.toggleBlock').on('click', (e) => {
+        if (e.target.classList[1]) {
+            $('.blocks').eq(0)[0].classList.add('hidden')
+            e.target.classList.remove('red')
+            e.target.innerHTML = '블록 열기'
+        } else {
+            $('.blocks').eq(0)[0].classList.remove('hidden')
+            e.target.classList.add('red')
+            e.target.innerHTML = '블록 닫기'
+        }
     })
 })
