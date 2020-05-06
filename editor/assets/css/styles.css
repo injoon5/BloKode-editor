@@ -1,12 +1,3 @@
 * {
     font-family: 'Metropolis', 'Spoqa Han Sans', Arial, Helvetica, sans-serif;
 }
-
-.logo {
-    font-family: 'Metropolis Bold', 'Spoqa Han Sans Bold', Arial, Helvetica, sans-serif;
-    font-size: 2rem;
-    position: absolute;
-    left: 30px;
-    top: 30px;
-    color: #3C82F4;
-}

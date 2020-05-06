@@ -1,19 +1,27 @@
 <link rel="stylesheet" href="assets/css/blokode.css">
 
-<a class="logo">BloKode</a>
-<div class="playground"></div>
-<div class="blocks">
-    <div class="bloKategory testCategory">
-        <div>
-            <div class="block test" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', null)"
-                data-function="test()">test</div>
+<div class="sidePanelContainer">
+    <div class="sidePanel">
+        <div class="logo">
+            <a href="/editor">BloKode</a>
         </div>
-        <div>
-            <div class="block annyonghasalbup" draggable="true"
-                ondragstart="event.dataTransfer.setData('text/plain', null)" data-function="hello()">안녕하살법!</div>
+        <div class="runBlocks">
+            <button class="run">실행</button>
+        </div>
+        <div class="blocks">
+            <div class="bloKategory testCategory">
+                <div>
+                    <div class="block test" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', null)"
+                        data-function="test()">test</div>
+                </div>
+                <div>
+                    <div class="block annyonghasalbup" draggable="true"
+                        ondragstart="event.dataTransfer.setData('text/plain', null)" data-function="hello()">안녕하살법!</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<button class="run">실행</button>
+<div class="playground"></div>
 
 <div class="blockList"></div>
