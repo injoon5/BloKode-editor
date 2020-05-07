@@ -10,7 +10,8 @@ lang.KR = {
     blocks: {
         testCategory: {
             test: '테스트',
-            annyonghasalbup: '안녕하살법'
+            annyonghasalbup: '안녕하살법',
+            print: '<input value="Hello, world!">출력',
         }
     },
 }

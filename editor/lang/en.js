@@ -10,7 +10,8 @@ lang.EN = {
     blocks: {
         testCategory: {
             test: 'test',
-            annyonghasalbup: 'annyonghasalbup'
+            annyonghasalbup: 'annyonghasalbup',
+            print: 'Print<input value="Hello, world!">',
         }
     },
 }

@@ -4,5 +4,8 @@ const blockCode = {
   },
   test: () => {
     alert('test')
+  },
+  print: (input) => {
+    alert(input)
   }
 }

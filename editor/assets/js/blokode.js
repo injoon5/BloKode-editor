@@ -10,7 +10,7 @@ if (localStorage.getItem('lang')) {
 
 const run = () => {
     for (let i = 0; i < $('.line .block').length; i++) {
-        blockCode[$('.line .block').eq(i)[0].classList[1]]()
+        blockCode[$('.line .block').eq(i)[0].classList[1]]($($('.line .block').eq(i)[0].getElementsByTagName('input')).val())
     }
 }
 
@@ -27,7 +27,7 @@ const langs = () => {
 
     for (let i = 0; i < $('.bloKategory div').length; i++) {
         for (let j = 0; j < $('.bloKategory').length; j++) {
-            $('.bloKategory div').eq(i).text(lang[language.toUpperCase()].blocks[$('.bloKategory').eq(j)[0].classList[1]][$('.bloKategory div').eq(i)[0].classList[1]])
+            $('.bloKategory div').eq(i).html(lang[language.toUpperCase()].blocks[$('.bloKategory').eq(j)[0].classList[1]][$('.bloKategory div').eq(i)[0].classList[1]])
         }
     }
 }
@@ -40,11 +40,10 @@ const addBlocks = (name, category) => {
         $(`.${category}Category`).append(`<div><div class="block ${name[i]}" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', null)" data-function="${name[i]}()"></div></div>`)
     }
 }
-
 // 블록 추가
-addBlocks(['test', 'annyonghasalbup'], 'test')
+addBlocks(['test', 'annyonghasalbup', 'print'], 'test')
 
-const clickEvents = () => {
+const events = () => {
     $('.run').on('click', (e) => {
         run()
     })
@@ -64,6 +63,9 @@ const clickEvents = () => {
             e.target.classList.add('red')
             e.target.innerHTML = lang[language.toUpperCase()].toggleBlockClose
         }
+    })
+    $('.block input').on('keydown', (e) => {
+        $(e.target).width($('.calcText').text($(e.target).val() + 5).width())
     })
 }
 
@@ -94,6 +96,10 @@ for (let i = 0; i < document.getElementsByClassName('block').length; i++) {
     })
     $(document).on('drop', (event) => {
         if (dragged.classList[0] != 'block') return
+        if (event.target.classList[0] == 'blocks' || (event.target.classList[0] == 'block' && event.target.parentNode.parentNode.parentNode.classList[0] == 'blocks')) {
+            dragged.parentNode.removeChild(dragged)
+            return
+        }
         event.preventDefault()
         if (event.target.className == 'line') {
             dragged.parentNode.removeChild(dragged)
@@ -175,5 +181,6 @@ $(() => {
     $('.playground').attr('style', `top: ${$('.sidePanel').height() + 10}px`)
     $('.language').height($('.run').eq(0)[0].clientHeight)
     $(`.language .${localStorage.getItem('lang')}`).attr('selected', 'true')
-    clickEvents()
+    $('.block input').width($('.calcText').text($('.block input').val() + 5).width())
+    events()
 })
