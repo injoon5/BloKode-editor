@@ -15,7 +15,11 @@ const run = () => {
 }
 
 const save = () => {
-    
+
+}
+
+const deleteLine = (e) => {
+    $(`.${e.target.parentNode.classList[0]} .block`).remove()
 }
 
 const langs = () => {
@@ -51,7 +55,7 @@ const events = () => {
         save()
     })
     $('.line-number').on('click', (e) => {
-        deleteLine()
+        deleteLine(e)
     })
     $('.toggleBlock').on('click', (e) => {
         if (e.target.classList[1]) {
