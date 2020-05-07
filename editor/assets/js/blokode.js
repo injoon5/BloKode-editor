@@ -14,16 +14,42 @@ const run = () => {
     }
 }
 
+const save = () => {
+    
+}
+
 const langs = () => {
     $('.run').text(lang[language.toUpperCase()].run)
     $('.toggleBlock').text(lang[language.toUpperCase()].toggleBlockOpen)
+    $('.save').text(lang[language.toUpperCase()].save)
     $('.language option').eq(0).text(lang[language.toUpperCase()].lang.en)
     $('.language option').eq(1).text(lang[language.toUpperCase()].lang.kr)
+
+    for (let i = 0; i < $('.bloKategory div').length; i++) {
+        for (let j = 0; j < $('.bloKategory').length; j++) {
+            $('.bloKategory div').eq(i).text(lang[language.toUpperCase()].blocks[$('.bloKategory').eq(j)[0].classList[1]][$('.bloKategory div').eq(i)[0].classList[1]])
+        }
+    }
 }
+
+const addBlocks = (name, category) => {
+    if (typeof $(`.${category}Category`).eq(0)[0] == 'undefined') {
+        $('.blocks').append(`<div class="bloKategory ${category}Category"></div>`)
+    }
+    for (let i in name) {
+        $(`.${category}Category`).append(`<div><div class="block ${name[i]}" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', null)" data-function="${name[i]}()"></div></div>`)
+    }
+}
+
+// 블록 추가
+addBlocks(['test', 'annyonghasalbup'], 'test')
 
 const clickEvents = () => {
     $('.run').on('click', (e) => {
         run()
+    })
+    $('.save').on('click', (e) => {
+        save()
     })
     $('.line-number').on('click', (e) => {
         deleteLine()
@@ -49,6 +75,7 @@ for (let i = 0; i < document.getElementsByClassName('block').length; i++) {
     let dragged, clone
     $(document).on('dragstart', (event) => {
         dragged = event.target
+        if (dragged.classList[0] != 'block') return
         clone = $(dragged).clone()
         if (dragged.parentNode.classList[0] != 'line') {
             $(event.target.parentNode).append(clone.addClass('hidden'))
@@ -56,14 +83,17 @@ for (let i = 0; i < document.getElementsByClassName('block').length; i++) {
         event.target.style.opacity = 0.5
     })
     $(document).on('dragend', (event) => {
+        if (dragged.classList[0] != 'block') return
         event.target.classList.add('dragged')
         event.target.style.marginLeft = '46px'
         event.target.style.opacity = ''
     })
     $(document).on('dragover', (event) => {
+        if (dragged.classList[0] != 'block') return
         event.preventDefault()
     })
     $(document).on('drop', (event) => {
+        if (dragged.classList[0] != 'block') return
         event.preventDefault()
         if (event.target.className == 'line') {
             dragged.parentNode.removeChild(dragged)
