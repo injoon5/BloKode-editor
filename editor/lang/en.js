@@ -2,6 +2,7 @@ lang.EN = {
     run: 'Run',
     toggleBlockOpen: 'Open Blocks',
     toggleBlockClose: 'Close Blocks',
+    toggleDarkmode: 'Dark Mode',
     save: 'Save',
     lang: {
         en: 'English',
@@ -9,8 +10,7 @@ lang.EN = {
     },
     blocks: {
         testCategory: {
-            test: 'test',
-            annyonghasalbup: 'annyonghasalbup',
+            log: 'Log<input value="Hello, world!">to console',
             print: 'Print<input value="Hello, world!">',
         }
     },

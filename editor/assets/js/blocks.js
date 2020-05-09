@@ -1,11 +1,8 @@
 const blockCode = {
-  annyonghasalbup: () => {
-    alert('hello!')
-  },
-  test: () => {
-    alert('test')
-  },
   print: (input) => {
     alert(input)
-  }
+  },
+  log: (input) => {
+    console.log(input)
+  },
 }

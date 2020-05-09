@@ -1,5 +1,13 @@
 const lines = new Array
-let lineNum = 0, language
+let lineNum = 0, language, tmpClipboard = ''
+$('.context').hide()
+
+console.stdlog = console.log.bind(console);
+console.logs = [];
+console.log = function () {
+    console.logs.push(Array.from(arguments));
+    console.stdlog.apply(console, arguments);
+}
 
 if (localStorage.getItem('lang')) {
     language = localStorage.getItem('lang')
@@ -28,6 +36,7 @@ const langs = () => {
     $('.save').text(lang[language.toUpperCase()].save)
     $('.language option').eq(0).text(lang[language.toUpperCase()].lang.en)
     $('.language option').eq(1).text(lang[language.toUpperCase()].lang.kr)
+    $('.darkmodeToggle').text(lang[language.toUpperCase()].toggleDarkmode)
 
     for (let i = 0; i < $('.bloKategory div').length; i++) {
         for (let j = 0; j < $('.bloKategory').length; j++) {
@@ -44,8 +53,12 @@ const addBlocks = (name, category) => {
         $(`.${category}Category`).append(`<div><div class="block ${name[i]}" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', null)" data-function="${name[i]}()"></div></div>`)
     }
 }
-// 블록 추가
-addBlocks(['test', 'annyonghasalbup', 'print'], 'test')
+
+let blockList
+for (const i in Object.keys(lang[language.toUpperCase()].blocks[Object.keys(lang[language.toUpperCase()].blocks)])) {
+    blockList = Object.keys(lang[language.toUpperCase()].blocks[Object.keys(lang[language.toUpperCase()].blocks)])
+}
+addBlocks(blockList, 'test')
 
 const events = () => {
     $('.run').on('click', (e) => {
@@ -71,6 +84,57 @@ const events = () => {
     $('.block input').on('keydown', (e) => {
         $(e.target).width($('.calcText').text($(e.target).val() + 5).width())
     })
+    
+    document.addEventListener('contextmenu', (e) => {
+        $('.context').hide()
+        if (typeof e.target.classList[0] == 'undefined') return
+        if (e.target.classList[0] == 'block') {
+            $('.context').html(`<div class="item copy">복사</div><div class="item runThis">이 코드만 실행</div><div class="item delThis">이 코드 삭제</div>`)
+            $('.delThis').on('click', () => {
+                deleteLine(e)
+                $('.context').hide()
+            })
+            $('.runThis').on('click', () => {
+                blockCode[e.target.classList[1]]($(`.${e.target.classList[1]} input`).val())
+                $('.context').hide()
+            })
+            $('.copy').on('click', () => {
+                tmpClipboard = e.target.classList[1]
+                $('.context').hide()
+            })
+            $('.context').show()
+            $('.context').css('left', e.clientX)
+            $('.context').css('top', e.clientY)
+            e.preventDefault()
+        } else if (e.target.classList[0] == 'line') {
+            $('.context').html(`<div class="item paste">붙여넣기</div><div class="item delThis">이 라인 삭제</div>`)
+            $('.delThis').on('click', () => {
+                deleteLine(e)
+                $('.context').hide()
+            })
+            $('.copy').on('click', () => {
+                tmpClipboard = e.target.classList[1]
+                $('.context').hide()
+            })
+            $('.paste').on('click', () => {
+                $(e.target).append(`<div><div class="block ${tmpClipboard} dragged" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', null)" data-function="${tmpClipboard}()" data-animation="ripple" style="height: 16px; margin-left: 46px;">${lang[language.toUpperCase()].blocks.testCategory[tmpClipboard]}</div></div>`)
+                $($(e.target)[0].getElementsByTagName('input')).width($('.calcText').text($($(e.target)[0].getElementsByTagName('input')).val() + 5).width())
+                $('.block input').on('keydown', (e) => {
+                    $(e.target).width($('.calcText').text($(e.target).val() + 5).width())
+                })
+                $('.context').hide()
+            })
+            $('.context').show()
+            $('.context').css('left', e.clientX)
+            $('.context').css('top', e.clientY)
+            e.preventDefault()
+        }
+    })
+    document.addEventListener('click', (e) => {
+        if (e.target.parentNode.classList[0] == 'context') return
+        $('.context').hide()
+    })
+
 }
 
 for (let i = 0; i < document.getElementsByClassName('block').length; i++) {
