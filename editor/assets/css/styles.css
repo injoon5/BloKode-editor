@@ -1,3 +1,113 @@
 * {
     font-family: 'Metropolis', 'Spoqa Han Sans', Arial, Helvetica, sans-serif;
 }
+
+body {
+    margin: 0;
+}
+
+header {
+    background-color: white;
+    width: 90vw;
+    height: fit-content;
+    position: fixed;
+    z-index: 1;
+    border: 1px solid #eee;
+    border-radius: 0 0 15px 15px;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+}
+
+button {
+    height: fit-content;
+    display: block;
+    border: none;
+    border-radius: 7px;
+    background-color: #3C82F4;
+    color: #FFF;
+    outline: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    padding: 10px 30px;
+    font-size: 1rem;
+    font-family: 'Metropolis Semi Bold', 'Spoqa Han Sans Bold', Arial, Helvetica, sans-serif;
+    width: max-content;
+    margin: 0 20px;
+}
+
+.headerInner {
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    font-family: 'Metropolis Semi Bold', 'Spoqa Han Sans Bold', Arial, Helvetica, sans-serif;
+    text-decoration: none;
+}
+
+.blockList {
+    height: max-content;
+    width: 100%;
+    margin: 15px auto auto auto;
+    display: flex;
+    border: 1px solid #eee;
+    border-radius: 10px;
+}
+
+.playground {
+    width: 85vw;
+    height: max-content;
+    margin: 10px auto;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+.block {
+    cursor: default;
+    border: none;
+    color: #FFF;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    padding: 15px;
+    font-size: 1rem;
+    font-family: 'Metropolis', 'Spoqa Han Sans', Arial, Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    width: fit-content;
+    touch-action: none;
+    user-select: none;
+    cursor: grab;
+}
+
+.block.basic {
+    background-color: #3C82F4;
+}
+
+.block.event {
+    background-color: #10b41e;
+}
+
+.blockList .block.basic {
+    margin: 15px;
+    border-radius: 0 15px 15px 0;
+}
+
+.blockList .block.event {
+    margin: 15px;
+    border-radius: 15px 15px 15px 0;
+}
+
+.playground .block.basic {
+    margin: 0 15px;
+    border-radius: 0 15px 15px 0;
+}
+
+.playground .block.event {
+    margin: 0 15px;
+    border-radius: 15px 15px 15px 0;
+}
