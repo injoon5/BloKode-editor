@@ -57,12 +57,7 @@ button {
 }
 
 .playground {
-    width: 85vw;
-    height: max-content;
-    margin: 10px auto;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    padding: 10px 0;
+    width: 100%;
 }
 
 .block {
@@ -84,6 +79,24 @@ button {
     cursor: grab;
 }
 
+.block input {
+    margin: 0 10px;
+    cursor: default;
+    border: none;
+    border-radius: 0 10px;
+    outline: none;
+    height: 95%;
+    -webkit-tap-highlight-color: transparent;
+    padding: 10px;
+    font-size: 1rem;
+    font-family: 'Metropolis', 'Spoqa Han Sans', Arial, Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    height: max-content;
+}
+
 .block.basic {
     background-color: #3C82F4;
 }
@@ -94,20 +107,37 @@ button {
 
 .blockList .block.basic {
     margin: 15px;
-    border-radius: 0 15px 15px 0;
+    border-radius: 15px 15px 15px 0;
 }
 
 .blockList .block.event {
     margin: 15px;
-    border-radius: 15px 15px 15px 0;
+    border-radius: 15px;
 }
 
-.playground .block.basic {
-    margin: 0 15px;
-    border-radius: 0 15px 15px 0;
+.blockList .block.event .blocks {
+    display: none;
+}
+
+.playground .block.event .blocks .block.basic {
+    margin: 0;
+    border-radius: 15px 15px 15px 0;
 }
 
 .playground .block.event {
     margin: 0 15px;
+    border-radius: 15px;
+    flex-direction: column;
+}
+
+.playground .block.event .blocks {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    height: max-content;
+    width: max-content;
+    background-color: white;
     border-radius: 15px 15px 15px 0;
+    min-height: 20px;
+    padding: 10px;
 }

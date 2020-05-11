@@ -8,16 +8,16 @@ const parseHTML = (html) => {
 
 const BloKode = {
     components: {
-        header: parseHTML('<header><div class="headerInner"><div class="logo"><a href="/">BloKode</a><a href="/new">editor</a></div><button>test</button></div></header>'),
+        header: parseHTML('<header><div class="headerInner"><div class="logo"><a href="/">BloKode</a><a href="/editor">editor</a></div><button class="run">실행</button></div></header>'),
         blockList: parseHTML('<div class="blockList"></div>'),
         playground: parseHTML('<div class="playground"></div>'),
     },
     block: {
         event: (c) => {
-            return parseHTML(`<div class="block event">${c}</div>`)
+            return parseHTML(`<div class="block event ${c}">${BloKode.block.scripts[c].template}<div class="blocks"></div></div>`)
         },
         basic: (c) => {
-            return parseHTML(`<div class="block basic">${c}</div>`)
+            return parseHTML(`<div class="block basic ${c}">${BloKode.block.scripts[c].template}</div>`)
         },
     },
 }
@@ -27,11 +27,17 @@ blokode.getElementsByTagName('header')[0].append(BloKode.components.blockList)
 blokode.append(BloKode.components.playground)
 
 let playground = blokode.getElementsByClassName('playground')[0],
-    blockList = blokode.getElementsByClassName('blockList')[0]
+    blockList = blokode.getElementsByClassName('blockList')[0];
 
-blockList.append(BloKode.block.event('test'))
-blockList.append(BloKode.block.basic('test'))
-blockList.append(BloKode.block.basic('tes'))
+(async () => {
+    eval(await (await fetch('/editor/assets/js/blocks.js')).text())
+
+    blockList.append(BloKode.block.event('start'))
+    blockList.append(BloKode.block.basic('log'))
+
+    blokode.getElementsByClassName('playground')[0].style.marginTop = `${blokode.getElementsByTagName('header')[0].clientHeight + 15}px`
+    blokode.getElementsByClassName('playground')[0].style.height = `calc(100vh - ${blokode.getElementsByTagName('header')[0].clientHeight + 15}px)`
+})()
 
 blokode.getElementsByTagName('a')[0].style.fontSize = '2rem'
 blokode.getElementsByTagName('a')[1].style.fontSize = '1.8rem'
@@ -41,8 +47,13 @@ blokode.getElementsByTagName('a')[1].style.marginLeft = '5px'
 
 document.getElementById('blokode').append(blokode)
 
-window.addEventListener('load', () => {
-    blokode.getElementsByClassName('playground')[0].style.marginTop = `${blokode.getElementsByTagName('header')[0].clientHeight + 15}px`
+
+blokode.getElementsByClassName('run')[0].addEventListener('click', () => {
+    for (let i = 0; i < playground.getElementsByClassName('event').length; i++) {
+        for (let j = 0; j < playground.getElementsByClassName('event')[i].getElementsByClassName('blocks')[0].getElementsByClassName('block').length; j++) {
+            BloKode.block.scripts[playground.getElementsByClassName('event')[i].getElementsByClassName('blocks')[0].getElementsByClassName('block')[j].classList[2]].func(playground.getElementsByClassName('event')[i].getElementsByClassName('blocks')[0].getElementsByClassName('block')[j].getElementsByTagName('input')[0].value)
+        }
+    }
 })
 
 new Sortable(blockList, {
@@ -57,5 +68,31 @@ new Sortable(blockList, {
 
 new Sortable(playground, {
     group: 'shared',
-    animation: 150
+    animation: 150,
+    onAdd: (e) => {
+        if (e.clone.classList[1] != 'event') {
+            e.item.remove()
+            return
+        }
+
+        let target
+
+        for (const i in blokode.getElementsByClassName('event')) {
+            if (blokode.getElementsByClassName('event')[i] == e.item) {
+                target = blokode.getElementsByClassName('event')[i]
+                break
+            }
+        }
+
+        new Sortable(target.getElementsByClassName('blocks')[0], {
+            group: 'shared',
+            animation: 150,
+            onAdd: (e) => {
+                if (e.clone.classList[1] == 'event') {
+                    e.item.remove()
+                    return
+                }
+            }
+        })
+    }
 })
