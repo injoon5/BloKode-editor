@@ -11,7 +11,7 @@ header {
     width: 90vw;
     height: fit-content;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     border: 1px solid #eee;
     border-radius: 0 0 15px 15px;
     top: 0;
@@ -37,6 +37,12 @@ button {
     margin: 0 20px;
 }
 
+#blokode {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .headerInner {
     display: flex;
     align-items: center;
@@ -57,7 +63,8 @@ button {
 }
 
 .playground {
-    width: 100%;
+    width: 90vw;
+    z-index: 1;
 }
 
 .block {
@@ -125,19 +132,52 @@ button {
 }
 
 .playground .block.event {
-    margin: 0 15px;
+    margin: 15px;
     border-radius: 15px;
-    flex-direction: column;
 }
 
 .playground .block.event .blocks {
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
     height: max-content;
     width: max-content;
     background-color: white;
     border-radius: 15px 15px 15px 0;
     min-height: 20px;
     padding: 10px;
+    margin: 0 0 0 10px;
+}
+
+.noblock {
+    color: #757575;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.noblock .title {
+    font-weight: 600;
+    font-size: 1.7rem;
+}
+
+.noblock .content {
+    font-size: 1.2rem;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.context {
+    min-height: 10px;
+    min-width: 10px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background-color: white;
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    z-index: 3;
 }
