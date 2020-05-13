@@ -8,9 +8,16 @@ BloKode.block.scripts = {
     },
     log: {
         skeleton: 'basic',
-        template: '콘솔에<input placeholder="Hello, world!">로그',
+        template: '콘솔에<input value="Hello, world!">로그',
         func: (input) => {
             console.log(input)
+        },
+    },
+    alert: {
+        skeleton: 'basic',
+        template: '<input value="Hello, world!">경고',
+        func: (input) => {
+            alert(input)
         },
     },
 }

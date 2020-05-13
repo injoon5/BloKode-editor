@@ -28,31 +28,77 @@ blokode.getElementsByTagName('header')[0].append(BloKode.components.blockList)
 blokode.append(BloKode.components.playground)
 
 let playground = blokode.getElementsByClassName('playground')[0],
-    blockList = blokode.getElementsByClassName('blockList')[0];
+    blockList = blokode.getElementsByClassName('blockList')[0],
+    tmpClipboard = '';
 
-(async () => {
-    eval(await (await fetch('/editor/assets/js/blocks.js')).text())
+        (async () => {
+            eval(await (await fetch('/editor/assets/js/blocks.js')).text())
 
-    blockList.append(BloKode.block.event('start'))
-    blockList.append(BloKode.block.basic('log'))
+            for (const i in BloKode.block.scripts) {
+                blockList.append(BloKode.block[BloKode.block.scripts[i].skeleton](i))
+            }
 
-    blokode.getElementsByClassName('playground')[0].style.marginTop = `${blokode.getElementsByTagName('header')[0].clientHeight + 15}px`
-    blokode.getElementsByClassName('playground')[0].style.height = `calc(100vh - ${blokode.getElementsByTagName('header')[0].clientHeight + 15}px)`
+            blokode.getElementsByClassName('playground')[0].style.marginTop = `${blokode.getElementsByTagName('header')[0].clientHeight + 15}px`
+            blokode.getElementsByClassName('playground')[0].style.height = `calc(100vh - ${blokode.getElementsByTagName('header')[0].clientHeight + 15}px)`
 
-    for (let i = 0; i < blokode.getElementsByClassName('block').length; i++) {
-        blokode.getElementsByClassName('block')[i].addEventListener('contextmenu', (e) => {
-            e.preventDefault()
             blokode.append(BloKode.components.context)
-            blokode.getElementsByClassName('context')[0].style.left = `${e.clientX}px`
-            blokode.getElementsByClassName('context')[0].style.top = `${e.clientY}px`
-        })
-    }
-    document.querySelectorAll('div').forEach((el) => {
-        el.addEventListener('click', () => {
-            console.log(el)
-        })
-    })
-})()
+            blokode.getElementsByClassName('context')[0].style.display = 'none'
+            
+            document.addEventListener('contextmenu', (e) => {
+                if (typeof e.target.classList[0] == 'undefined') return
+                if (e.target.classList[0] == 'block' && e.target.parentNode.classList[0] != 'blocks' && e.target.parentNode.classList[0] != 'playground') {
+                    blokode.getElementsByClassName('context')[0].innerHTML = '<div class="copy">복사</div><div class="runThis">이 코드 실행</div>'
+                    blokode.getElementsByClassName('context')[0].style.display = 'flex'
+                    blokode.getElementsByClassName('context')[0].style.left = `${e.clientX}px`
+                    blokode.getElementsByClassName('context')[0].style.top = `${e.clientY}px`
+
+                    blokode.getElementsByClassName('context')[0].getElementsByClassName('copy')[0].addEventListener('click', () => {
+                        tmpClipboard = e.target.classList[2]
+                    })
+                    blokode.getElementsByClassName('context')[0].getElementsByClassName('runThis')[0].addEventListener('click', () => {
+                        BloKode.block.scripts[e.target.classList[2]].func(e.target.getElementsByTagName('input')[0].value)
+                    })
+                } else if (e.target.parentNode.classList[0] == 'blocks' || e.target.parentNode.classList[0] == 'playground') {
+                    blokode.getElementsByClassName('context')[0].innerHTML = '<div class="copy">복사</div><div class="delThis">삭제</div><div class="runThis">이 코드 실행</div>'
+                    blokode.getElementsByClassName('context')[0].style.display = 'flex'
+                    blokode.getElementsByClassName('context')[0].style.left = `${e.clientX}px`
+                    blokode.getElementsByClassName('context')[0].style.top = `${e.clientY}px`
+
+                    blokode.getElementsByClassName('context')[0].getElementsByClassName('copy')[0].addEventListener('click', () => {
+                        tmpClipboard = e.target.classList[2]
+                    })
+                    blokode.getElementsByClassName('context')[0].getElementsByClassName('runThis')[0].addEventListener('click', () => {
+                        BloKode.block.scripts[e.target.classList[2]].func(e.target.getElementsByTagName('input')[0].value)
+                    })
+                    blokode.getElementsByClassName('context')[0].getElementsByClassName('delThis')[0].addEventListener('click', () => {
+                        e.target.remove()
+                    })
+                } else if (e.target.classList[0] == 'playground') {
+                    blokode.getElementsByClassName('context')[0].innerHTML = '<div class="copy">복사</div><div class="del">모두 삭제</div><div class="runAll">실행</div>'
+                    blokode.getElementsByClassName('context')[0].style.display = 'flex'
+                    blokode.getElementsByClassName('context')[0].style.left = `${e.clientX}px`
+                    blokode.getElementsByClassName('context')[0].style.top = `${e.clientY}px`
+
+                    blokode.getElementsByClassName('context')[0].getElementsByClassName('copy')[0].addEventListener('click', () => {
+                        tmpClipboard = e.target.classList[2]
+                    })
+                    blokode.getElementsByClassName('context')[0].getElementsByClassName('runAll')[0].addEventListener('click', () => {
+                        for (let i = 0; i < playground.getElementsByClassName('event').length; i++) {
+                            for (let j = 0; j < playground.getElementsByClassName('event')[i].getElementsByClassName('blocks')[0].getElementsByClassName('block').length; j++) {
+                                BloKode.block.scripts[playground.getElementsByClassName('event')[i].getElementsByClassName('blocks')[0].getElementsByClassName('block')[j].classList[2]].func(playground.getElementsByClassName('event')[i].getElementsByClassName('blocks')[0].getElementsByClassName('block')[j].getElementsByTagName('input')[0].value)
+                            }
+                        }
+                    })
+                    blokode.getElementsByClassName('context')[0].getElementsByClassName('del')[0].addEventListener('click', () => {
+                        e.target.innerHTML = ''
+                    })
+                }
+                e.preventDefault()
+            })
+            document.addEventListener('click', () => {
+                blokode.getElementsByClassName('context')[0].style.display = 'none'
+            })
+        })()
 
 blokode.getElementsByTagName('a')[0].style.fontSize = '2rem'
 blokode.getElementsByTagName('a')[1].style.fontSize = '1.8rem'
