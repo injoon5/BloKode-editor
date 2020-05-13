@@ -195,3 +195,64 @@ button {
     cursor: pointer;
     border-bottom: 0;
 }
+
+.console {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    z-index: 5;
+    min-height: 10px;
+    min-width: 10px;
+    height: max-content;
+    width: max-content;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    border: 1px solid #eee;
+    background-color: white;
+    padding: 20px;
+}
+
+.console .title {
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.console .log, .console .info {
+    background-color: #ffffff;
+    border-radius: 3px;
+    height: max-content;
+    width: max-content;
+    padding: 5px;
+    color: black;
+}
+
+.console .error {
+    background-color: #db4141;
+    border-radius: 3px;
+    height: max-content;
+    width: max-content;
+    color: white;
+    padding: 5px;
+}
+
+.console .warn {
+    background-color: #fffb1c;
+    border-radius: 3px;
+    height: max-content;
+    width: max-content;
+    color: black;
+    padding: 5px;
+}
+
+.dim {
+    z-index: 4;
+    background-color: rgba(0, 0, 0, 0.541);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+}
