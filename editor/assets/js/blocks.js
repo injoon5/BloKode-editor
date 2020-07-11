@@ -1,7 +1,7 @@
 BloKode.block.scripts = {
     start: {
         skeleton: 'event',
-        template: 'ㄱㄱ',
+        template: '시작',
         func: () => {
             console.log('test')
         },
@@ -20,14 +20,13 @@ BloKode.block.scripts = {
             alert(input)
         },
     },
-     popup: {
+     newtab: {
         skeleton: 'basic',
-        template: '팝업창 열기. URL:<input value="about:blank1">',
+        template: '새탭 열기. URL:<input value="about:blank1">',
         func: (input) => {
-            function popup(){
-                var url = input;
-                var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-                window.open(url, option);
+            
+                
+                window.open(input);
         }
         },
     },
