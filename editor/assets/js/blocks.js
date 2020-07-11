@@ -25,10 +25,9 @@ BloKode.block.scripts = {
         template: '팝업창 열기. URL:<input value="about:blank">',
         func: (input) => {
             function popup(){
-            var url = input;
-            var name = "popup";
-            var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-            window.open(url, name, option);
+                var url = input;
+                var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+                window.open(url, name, option);
         }
         },
     },
