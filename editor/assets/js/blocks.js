@@ -20,11 +20,18 @@ BloKode.block.scripts = {
             alert(input)
         },
     },
-    popup: {
+    newtab: {
         skeleton: 'basic',
         template: '<input value="Hello, world!">경고',
         func: (input) => {
             window.open(input);
+        },
+    },
+    popup: {
+        skeleton: 'basic',
+        template: '<input value="Hello, world!">경고',
+        func: (input) => {
+            window.open(input, '팝업', 'top=10, left=10, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no');
         },
     },
 }
