@@ -27,13 +27,11 @@ BloKode.block.scripts = {
             window.open(input);
         },
     },
-    popup: {
+    custom: {
         skeleton: 'basic',
-        template: '<input value="Hello, world!">경고',
+        template: '<input value="alert('hello')">js ',
         func: (input) => {
-            var name = "popup";
-            var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-            window.open(input, name, option);
+            `${input}`
         },
     },
 }
