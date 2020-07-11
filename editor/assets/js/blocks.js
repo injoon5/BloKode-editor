@@ -20,4 +20,11 @@ BloKode.block.scripts = {
             alert(input)
         },
     },
+    popup: {
+        skeleton: 'basic',
+        template: '<input value="Hello, world!">경고',
+        func: (input) => {
+            window.open(input);
+        },
+    },
 }
