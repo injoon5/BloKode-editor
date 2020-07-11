@@ -24,9 +24,7 @@ BloKode.block.scripts = {
         skeleton: 'basic',
         template: '새탭 열기. URL:<input value="about:blank1">',
         func: (input) => {
-            
-                
-                window.open(input);
+            window.open(input);
         }
         },
     },
