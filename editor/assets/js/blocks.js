@@ -22,7 +22,7 @@ BloKode.block.scripts = {
     },
     newtab: {
         skeleton: 'basic',
-        template: '<input value="Hello, world!">경고',
+        template: '<input value="Hello, world!">새탭에서 열기',
         func: (input) => {
             window.open(input);
         },
@@ -31,7 +31,9 @@ BloKode.block.scripts = {
         skeleton: 'basic',
         template: '<input value="Hello, world!">경고',
         func: (input) => {
-            window.open(input, '팝업', 'top=10, left=10, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no');
+            var name = "popup";
+            var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+            window.open(input, name, option);
         },
     },
 }
