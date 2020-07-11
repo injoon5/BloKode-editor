@@ -1,7 +1,7 @@
 BloKode.block.scripts = {
     start: {
         skeleton: 'event',
-        template: '시작',
+        template: 'ㄱㄱ',
         func: () => {
             console.log('test')
         },
@@ -18,14 +18,6 @@ BloKode.block.scripts = {
         template: '<input value="Hello, world!">경고',
         func: (input) => {
             alert(input)
-        },
-    },
-     newtab: {
-        skeleton: 'basic',
-        template: '새탭 열기. URL:<input value="about:blank1">',
-        func: (input) => {
-            window.open(input);
-        }
         },
     },
 }
