@@ -29,9 +29,9 @@ BloKode.block.scripts = {
     },
     custom: {
         skeleton: 'basic',
-        template: '<input value="alert('hello')">js ',
+        template: '<input value="hello">js ',
         func: (input) => {
-            `${input}`
+            input
         },
     },
 }
